@@ -71,3 +71,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 section {
   min-height: 100vh;
 }
+
+/* line 4, ../sass/elements/_elements.scss */
+nav.main-menu {
+  position: relative;
+  z-index: 999;
+}
