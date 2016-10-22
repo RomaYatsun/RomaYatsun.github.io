@@ -33,29 +33,25 @@ PageAnim.prototype.clickMenuHash = function() {
       if (self.checkHash(this.hash.slice(1))) {
         nextHash = this.hash.slice(1);
       };
-      self.changePage(nextHash);
     })
   });
 
 };
 
 PageAnim.prototype.changePage = function(nextHash) {
-  var nexPage = main.querySelector(
+  var nextPage = main.querySelector(
     pageSection + "[data-anchor = " + nextHash + "]");
   [].forEach.call(document.querySelectorAll(pageSection), function(el) {
     el.classList.remove(currentPageClass);
   });
-  nexPage.classList.add(currentPageClass);
+  nextPage.classList.add(currentPageClass);
 
 };
 
 PageAnim.prototype.updateHash = function() {
-
   if (this.windowHash === '') {
     nextHash = this.firstPage.dataset.anchor;
     this.windowHash = this.firstPage.dataset.anchor;
-  } else if (this.checkHash(this.windowHash)) {
-    nextHash = this.windowHash;
   } else {
     currentHash = nextHash;
   }
@@ -73,6 +69,7 @@ PageAnim.prototype.init = function() {
     nextHash = this.firstPage.dataset.anchor;
     this.changePage(nextHash)
   } else {
+    nextHash = this.windowHash
     self.updateHash();
   }
 };
