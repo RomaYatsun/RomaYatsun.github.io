@@ -4,7 +4,7 @@ var main = document.querySelector('.pt-main'),
   pageSection = '.pt-page',
   menuItem = document.querySelectorAll('.pt-anchor'),
   currentPageClass = "pt-page-current",
-  currentHash = window.location.hash,
+  currentHash = window.location.hash.slice(1),
   nextHash;
 
 var PageAnim = function(mainEl) {
@@ -30,9 +30,11 @@ PageAnim.prototype.clickMenuHash = function() {
   [].forEach.call(menuItem, function(el) {
 
     el.addEventListener('click', function(e) {
+      currentHash = window.location.hash.slice(1);
       if (self.checkHash(this.hash.slice(1))) {
         nextHash = this.hash.slice(1);
       };
+      // self.changePage(nextHash);
     })
   });
 
@@ -41,19 +43,25 @@ PageAnim.prototype.clickMenuHash = function() {
 PageAnim.prototype.changePage = function(nextHash) {
   var nextPage = main.querySelector(
     pageSection + "[data-anchor = " + nextHash + "]");
-  [].forEach.call(document.querySelectorAll(pageSection), function(el) {
-    el.classList.remove(currentPageClass);
-  });
+  if (currentHash != '') {
+    [].forEach.call(document.querySelectorAll(pageSection), function(el) {
+      if (el.classList.contains(currentHash)) {
+        console.log(currentHash);
+        el.classList.remove(currentPageClass);
+      } else {
+        el.classList.remove(currentPageClass);
+      }
+    });
+  }
   nextPage.classList.add(currentPageClass);
 
 };
 
 PageAnim.prototype.updateHash = function() {
+
   if (this.windowHash === '') {
     nextHash = this.firstPage.dataset.anchor;
     this.windowHash = this.firstPage.dataset.anchor;
-  } else {
-    currentHash = nextHash;
   }
   this.changePage(nextHash);
 };
@@ -61,15 +69,17 @@ PageAnim.prototype.updateHash = function() {
 
 PageAnim.prototype.init = function() {
   var self = this;
+  currentHash = '';
   this.clickMenuHash();
   window.addEventListener('hashchange', function() {
     self.updateHash();
   });
-  if (!this.checkHash(this.windowHash)) {
+
+  if (this.windowHash === '' || !this.checkHash(this.windowHash)) {
     nextHash = this.firstPage.dataset.anchor;
-    this.changePage(nextHash)
+    this.changePage(nextHash);
   } else {
-    nextHash = this.windowHash
+    nextHash = this.windowHash;
     self.updateHash();
   }
 };

@@ -108,7 +108,7 @@ html, body { height: 100%; }
 	margin-top: 130px;
 	-webkit-transform: translateX(-50%);
 	-moz-transform: translateX(-50%);
-	-ms-transform: translateX(-50%); 
+	-ms-transform: translateX(-50%);
 	transform: translateX(-50%);
 }
 
@@ -199,7 +199,7 @@ html, body { height: 100%; }
 	}
 }
 
-@media screen and (max-height: 38em) { 
+@media screen and (max-height: 38em) {
 	.pt-triggers .dl-menuwrapper {
 		display: none;
 	}
