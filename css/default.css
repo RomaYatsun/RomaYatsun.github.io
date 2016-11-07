@@ -1,5 +1,5 @@
 /* General Demo Style */
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Satisfy);
+/*@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Satisfy);
 
 @font-face {
 	font-family: 'codropsicons';
@@ -10,7 +10,7 @@
 		url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
 	font-weight: normal;
 	font-style: normal;
-}
+}*/
 
 *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 body, html { font-size: 100%; padding: 0; margin: 0;}
@@ -96,9 +96,8 @@ a:hover {
 	content: "\e003";
 }
 
-@media screen and (max-width: 25em) { 
+@media screen and (max-width: 25em) {
 	.codrops-icon span {
 		display: none;
 	}
 }
-

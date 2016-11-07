@@ -24,55 +24,46 @@ PageAnim.prototype.checkHash = function(hash) {
   }
 };
 
-PageAnim.prototype.clickMenuHash = function() {
-  var self = this;
-
-  [].forEach.call(menuItem, function(el) {
-
-    el.addEventListener('click', function(e) {
-      currentHash = window.location.hash.slice(1);
-      if (self.checkHash(this.hash.slice(1))) {
-        nextHash = this.hash.slice(1);
-      };
-      // self.changePage(nextHash);
-    })
-  });
-
-};
-
 PageAnim.prototype.changePage = function(nextHash) {
+  var self = this;
   var nextPage = main.querySelector(
     pageSection + "[data-anchor = " + nextHash + "]");
-  if (currentHash != '') {
-    [].forEach.call(document.querySelectorAll(pageSection), function(el) {
+  [].forEach.call(document.querySelectorAll(pageSection), function(el) {
+    if (currentHash != '' && self.checkHash(currentHash)) {
       if (el.classList.contains(currentHash)) {
-        console.log(currentHash);
-        el.classList.remove(currentPageClass);
-      } else {
         el.classList.remove(currentPageClass);
       }
-    });
-  }
+    } else {
+      el.classList.remove(currentPageClass);
+    }
+  });
   nextPage.classList.add(currentPageClass);
 
 };
 
-PageAnim.prototype.updateHash = function() {
-
-  if (this.windowHash === '') {
-    nextHash = this.firstPage.dataset.anchor;
-    this.windowHash = this.firstPage.dataset.anchor;
-  }
-  this.changePage(nextHash);
-};
-
-
 PageAnim.prototype.init = function() {
   var self = this;
-  currentHash = '';
-  this.clickMenuHash();
+  var prev, next;
+
+  currentHash = '',
+    prev = window.location.hash;
+
   window.addEventListener('hashchange', function() {
-    self.updateHash();
+    setInterval(function() {
+      next = window.location.hash;
+      if (prev === next) return;
+      nextHash = next.slice(1);
+      currentHash = prev.slice(1);
+      prev = next;
+
+      if (nextHash === '') {
+        nextHash = self.firstPage.dataset.anchor;
+        self.changePage(nextHash);
+      }
+      if (self.checkHash(nextHash)) {
+        self.changePage(nextHash);
+      }
+    }, 100);
   });
 
   if (this.windowHash === '' || !this.checkHash(this.windowHash)) {
@@ -80,7 +71,7 @@ PageAnim.prototype.init = function() {
     this.changePage(nextHash);
   } else {
     nextHash = this.windowHash;
-    self.updateHash();
+    self.changePage(nextHash);
   }
 };
 
