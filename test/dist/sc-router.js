@@ -42,11 +42,11 @@ var SCRouter = function (_HTMLElement) {
       var path = window.location.pathname;
       var routes = Array.from(this._routes.keys());
       var route = routes.find(function (r) {
+        console.dir(r);
+        // console.log("----------");
+        // console.log(path);
         return r.test(path);
       });
-      console.dir(routes);
-      // console.log("----------");
-      // console.log(path);
       var data = route.exec(path);
 
       if (!route) {
