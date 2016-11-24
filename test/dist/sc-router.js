@@ -42,7 +42,7 @@ var SCRouter = function (_HTMLElement) {
       var path = window.location.pathname;
       var routes = Array.from(this._routes.keys());
       var route = routes.find(function (r) {
-        console.dir(r);
+        console.dir(r.test(path));
         // console.log("----------");
         // console.log(path);
         return r.test(path);
