@@ -39,15 +39,9 @@ var SCRouter = function (_HTMLElement) {
     value: function _onChanged() {
       var _this2 = this;
 
-      var path = window.location.hash.slice(1);
+      var path = window.location.pathname;
       var routes = Array.from(this._routes.keys());
       var route = routes.find(function (r) {
-        console.log(r);
-        console.log("-------");
-        console.log(path);
-        console.log("-------");
-        console.dir(r.test(path));
-        console.log("===========");
         return r.test(path);
       });
       var data = route.exec(path);
