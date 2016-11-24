@@ -7,10 +7,10 @@ nav.main-menu {
 }
 .pt-page {
   opacity: 0;
-  transition: opacity 1s;
-
+  transition: 1s;
+  //
   &.pt-page-current {
     opacity: 1;
-    transition: opacity 1s;
+    transition: 1s;
   }
 }
