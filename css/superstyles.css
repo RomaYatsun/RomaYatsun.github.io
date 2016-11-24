@@ -35,9 +35,10 @@ sc-view {
   height: 100%;
   opacity: 0;
   pointer-events: none;
-  transform: scale(0.95);
+  /*transform: scale(0.95);
   transition: transform 0.3s cubic-bezier(0,0,0.3,1),
-    opacity 0.3s cubic-bezier(0,0,0.3,1);
+    opacity 0.3s cubic-bezier(0,0,0.3,1);*/
+    transition: all 1s;
   font-size: 20vh;
   display: flex;
   flex-direction: row;
@@ -50,6 +51,7 @@ sc-view.visible {
   opacity: 1;
   pointer-events: auto;
   transform: none;
+  transition: all 1s;
 }
 
 .view-home {
