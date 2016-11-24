@@ -44,6 +44,7 @@ var SCRouter = function (_HTMLElement) {
       var route = routes.find(function (r) {
         return r.test(path);
       });
+      console.log(path);
       var data = route.exec(path);
 
       if (!route) {
